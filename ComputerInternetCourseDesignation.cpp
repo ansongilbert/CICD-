@@ -7,65 +7,74 @@
 #include"router.h"
 using namespace std;
 
-
 int main()
 {
-	/*int table[9][9];
-	ifstream in("topo.txt", ios::in);
-	if(in)
+	int num = 0;//the num of the router
+	int table[20][20];
+	int number1 = 0;
+	int* Ptable[20];
+	router* h = new router;
+	while (1)
 	{
-		for (int i = 0; i < 9; i++)
+		ifstream in("topo.txt", ios::in);
+		if (in)
+		{
+			in >> num;
+			for (int i = 0; i < num; i++)
+			{
+				for (int j = 0; j < num; j++)
+				{
+					in >> table[i][j];
+				}
+			}
+		}
+		in.close();
+		/*for (int i = 0; i < 9; i++)
 		{
 			for (int j = 0; j < 9; j++)
 			{
-				in >> table[i][j];
+				Ptable[i][j] = table[i][j];
+			}
+		}*/
+		/*for (int i = 0; i < 9; i++)
+		{
+			for (int j = 0; j < 9; j++)
+			{
+				cout<< table[i][j]<<' ';
+			}
+			cout << endl;
+		}*/
+		for (int i = 0; i < num; i++)
+		{
+			cout << endl;
+			Ptable[i] = table[i];
+			for (int j = 0; j < num; j++)
+			{
+				cout << table[i][j] << ' ';
 			}
 		}
-	}
-	in.close(); */
-	int** table=read("topo.txt");
-	/*for (int i = 0; i < 9; i++)
-	{
-		for (int j = 0; j < 9; j++)
+		cout << endl << "choice? 1 for table, 2 for delete, 3 for add, else for quit." << flush << endl;
+		cin >> number1;
+		if (number1 == 1)
 		{
-			cout<< table[i][j]<<' ';
+			cout << "number" << flush << endl;
+			cin >> number1;
+			h->number = number1;
+			h->create(num, Ptable);
 		}
-		cout << endl;
-	}*/
-	for (int i = 0; i < 9; i++)
-	{
-		for (int j = 0; j < 9; j++)
+		else if (number1 == 2)
 		{
-			cout << table[i][j] << ' ';
+			num = h->delete_(num);
 		}
-		cout << endl;
+		else if (number1 == 3)
+		{
+			num = h->add(num);
+		}
+		else
+			exit(2);
 	}
-	//int* p[9]; 
-	//for(int i=0;i<9;i++)
-	//p[i]= table[i];
-	router* h = new router;
-	//dijskstra is done, create()is done
-	h->number = 6;
-	h->create(9, table);
 }
 
-int** read(const char* a)
-{
-	int *table[9];
-	ifstream in(a, ios::in);
-	if (in)
-	{
-		for (int i = 0; i < 9; i++)
-		{
-			for (int j = 0; j < 9; j++)
-			{
-				in >> table[i][j];
-			}
-		}
-	}
-	in.close();
-	return table;
-}
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
 // Debug program: F5 or Debug > Start Debugging menu

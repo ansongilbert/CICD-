@@ -7,6 +7,7 @@ public:
 	router_table* a;//table
 	router* next;
 	void create(int n, int** p);
-	void delete_();
+	int delete_(int n);
+	int add(int n);
 };
 

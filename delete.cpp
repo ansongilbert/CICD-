@@ -4,34 +4,48 @@
 #include<fstream>
 using namespace std;
 
-void router::delete_()
+int router::delete_(int n)
 {
 	int number = 0;
 	int number2 = 0;
-	int* p[9];
+	int* p[20];
+	int pt[20][20];
 	cout << "delete node or side,1 or 2." << flush << endl;
 	cin >> number;
 	ifstream in("topo.txt", ios::in);
 	if (in)
 	{
-		for (int i = 0; i < 9; i++)
+		in >> n;
+		for (int i = 0; i < n; i++)
 		{
-			for (int j = 0; j < 9; j++)
+			p[i] = pt[i];
+			for (int j = 0; j < n; j++)
 			{
-				in >> p[i][j];
+				in >> pt[i][j];
 			}
 		}
 	}
 	in.close();
 	if (number == 1)//node
 	{
+		n = n - 1;
 		cout << "input the number of node you want to delete." << flush << endl;
 		cin >> number;
-		for (int i = 0; i < 9; i++)
+		for (int j = 0; j < n; j++)
 		{
-			p[number][i] = 0;
-			p[i][number] = 0;
+			for (int i = number; i < n - 1; i++)
+			{
+				p[j][i] = p[j][i + 1];
+			}
 		}
+		for (int i = number; i < n - 1; i++)
+		{
+			for (int j = 0; j < n; j++)
+			{
+				p[i][j] = p[i + 1][j];
+			}
+		}
+		//this->create(n, p);
 	}
 	else if (number == 2)//side
 	{
@@ -39,6 +53,21 @@ void router::delete_()
 		cin >> number >> number2;
 		p[number][number2] = 0;
 		p[number2][number] = 0;
+		//this->create(n, p);
 	}
-	this->create(9, p);
+	ofstream out("topo.txt", ios::out);
+	if (out)
+	{
+		out << n << endl;
+		for (int i = 0; i < n; i++)
+		{
+			for (int j = 0; j < n; j++)
+			{
+				out << p[i][j] << ' ';
+			}
+			out << endl;
+		}
+	}
+	out.close();
+	return n;
 }

@@ -78,7 +78,7 @@ void router::create(int n, int** p)
 	{
 		cout << dis[i] << ' ' << nxt[i] << endl;
 	}*/
-	int default_ = 0; 
+	/*int default_ = 0; 
 	for (int i = 0; i <= n - 1; i++)
 	{
 		if (nxt[i] == this->number)
@@ -94,15 +94,15 @@ void router::create(int n, int** p)
 	{
 		if (count[default_] < count[i])
 			default_ = i;
-	}
+	}*/
 	/*for (int i = 0; i <= n - 1; i++)
 		cout << count[i] << endl;*/
 	this->a = new router_table;
 	router_table* pre = this->a;
-	router_table* cur;
+	router_table* cur = nullptr;
 	for (int i = 0; i <= n - 1; i++)
 	{
-		if (count[i] != 0 && i != default_ && i != this->number)
+		if (i != this->number)
 		{
 			cur = new router_table;
 			cur->next = nullptr;
@@ -114,11 +114,11 @@ void router::create(int n, int** p)
 			pre = cur;
 		}
 	}//cout << endl << default_;
-	cur = new router_table;
+	/*cur = new router_table;
 	cur->next = nullptr;
 	pre->next = cur;
-	cur->create(default_, default_);
-	pre = cur;	
+	cur->create(default_, default_);*/
+	pre = cur;
 	cur = this->a->next;
 	while (cur != nullptr)
 	{
