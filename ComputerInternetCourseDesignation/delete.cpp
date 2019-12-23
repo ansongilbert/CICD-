@@ -51,8 +51,8 @@ int router::delete_(int n)
 	{
 		cout << "input the two nodes of the side" << endl << flush;
 		cin >> number >> number2;
-		p[number][number2] = 0;
-		p[number2][number] = 0;
+		p[number-1][number2-1] = 0;
+		p[number2-1][number-1] = 0;
 		//this->create(n, p);
 	}
 	ofstream out("topo.txt", ios::out);

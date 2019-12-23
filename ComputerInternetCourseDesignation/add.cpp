@@ -34,8 +34,8 @@ int router::add(int n)
 		cin >> number >> number2;
 		cout << "the length" << flush << endl;
 		cin >> length;
-		p[number][number2] = length;
-		p[number2][number] = length;
+		p[number-1][number2-1] = length;
+		p[number2-1][number-1] = length;
 		//create(n, p);
 	}
 	else if (number == 1)
