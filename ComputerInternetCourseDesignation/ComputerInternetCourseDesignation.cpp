@@ -59,6 +59,12 @@ int main()
 		{
 			cout << "number" << flush << endl;
 			cin >> number1;
+			if (number1<1 || number1>num)
+			{
+				cout << "input error." << endl;
+				continue;
+			}
+			number1 -= 1;
 			h->number = number1;
 			h->create(num, Ptable);
 		}
